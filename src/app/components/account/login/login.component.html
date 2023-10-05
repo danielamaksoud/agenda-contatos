@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <div class="card mt-4">
+            <div class="card-body">
+                <div class="text-center">
+                    <h2>Acessar Agenda</h2>
+                    <p>Entre com suas credenciais de usuário.</p>
+                </div>
+                <form>
+                    <div class="mb-2">
+                        <label>Email de acesso:</label>
+                        <input type="text" class="form-control" placeholder="Digite seu email aqui." />
+                    </div>
+                    <div class="mb-2">
+                        <label>Senha de acesso:</label>
+                        <input type="text" class="form-control" placeholder="Digite sua senha aqui." />
+                        <div class="text-end">
+                            <a [routerLink]="['/account/forgot-password']">
+                                Esqueci minha senha
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mb-2 d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            Entrar
+                        </button>
+                    </div>
+                    <div class="mb-2 d-grid">
+                        <a [routerLink]="['/account/register']" class="btn btn-light">
+                            Não possui conta? <b>Cadastre-se aqui!</b>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
