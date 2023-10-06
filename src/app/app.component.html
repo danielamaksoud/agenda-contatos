@@ -1,9 +1,19 @@
-<app-navbar/>
+<!-- Barra de Navegação -->
+<app-navbar />
 
 <!-- Conteúdo da página -->
 <div class="container">
-
-    <!-- Componentes -->
-    <router-outlet></router-outlet>
-    
+  <!-- Componentes -->
+  <router-outlet></router-outlet>
 </div>
+
+<!-- NGX Spinner -->
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="timer"
+  [fullScreen]="true"
+>
+  <p style="color: white">Processando, por favor aguarde...</p>
+</ngx-spinner>
