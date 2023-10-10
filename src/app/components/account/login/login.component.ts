@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -7,6 +8,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+
+  // Método construtor
+
+constructor( 
+  // Injeção de dependência
+  private ngxSpinnerService: NgxSpinnerService ) { }
+
   // Criando a estrutura do formulário
   formLogin = new FormGroup({
     // Campo 'email'
@@ -41,5 +49,8 @@ export class LoginComponent {
   onSubmit(): void {
     console.log(this.formLogin.value.email);
     console.log(this.formLogin.value.senha);
+    // Exibindo o spinner
+    this.ngxSpinnerService.show();
   }
+
 }
