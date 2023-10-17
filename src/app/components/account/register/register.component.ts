@@ -58,10 +58,10 @@ export class RegisterComponent {
 
   },
   
-  /* Adicionando validações customizadas. */
-  {
-    validators: [MatchPasswordValidator.matchPassword],
-  }
+    /* Adicionando validações customizadas. */
+    {
+      validators: [MatchPasswordValidator.matchPassword],
+    }
   );
 
   /*
