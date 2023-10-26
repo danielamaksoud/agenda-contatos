@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
+import { CriarContaRequestModel } from 'src/app/models/usuarios/criar-conta-request.model';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 import { MatchPasswordValidator } from 'src/app/validators/match-password.validator';
 
 @Component({
@@ -8,6 +11,14 @@ import { MatchPasswordValidator } from 'src/app/validators/match-password.valida
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+
+  // Construtor
+  constructor(
+    // Injeção de dependência
+    // Nome: Tipo
+    private usuariosService: UsuariosService,
+    private ngxSpinnerService: NgxSpinnerService,
+  ) {};
 
   // Criando a estrutura do formulário
 
@@ -77,8 +88,28 @@ export class RegisterComponent {
   Função para capturar o evento de submit.
  */
 onSubmit(): void {
-  /* Imprimir os campos do formulário. */
-  console.log(this.formRegister.value);
+  this.ngxSpinnerService.show();
+
+  const model: CriarContaRequestModel = {
+    nome: this.formRegister.value.nome as string,
+    email: this.formRegister.value.email as string,
+    senha: this.formRegister.value.senha as string,
+  };
+
+  this.usuariosService.criarConta(model)
+  .subscribe({
+    // Sucesso
+    next: (response) => {
+      console.log(response);
+    },
+    // Falha
+    error: (e) => {
+      console.log(e.error);
+    }
+  }).add(() => {
+    this.ngxSpinnerService.hide();
+  });
+
 };
 
 }
