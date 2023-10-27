@@ -12,6 +12,10 @@ import { MatchPasswordValidator } from 'src/app/validators/match-password.valida
 })
 export class RegisterComponent {
 
+  // Variáveis do Componente
+  mensagemSucesso: string = '';
+  mensagemErro: string = '';
+
   // Construtor
   constructor(
     // Injeção de dependência
@@ -90,6 +94,9 @@ export class RegisterComponent {
 onSubmit(): void {
   this.ngxSpinnerService.show();
 
+  this.mensagemErro = '';
+  this.mensagemSucesso = '';
+
   const model: CriarContaRequestModel = {
     nome: this.formRegister.value.nome as string,
     email: this.formRegister.value.email as string,
@@ -100,11 +107,12 @@ onSubmit(): void {
   .subscribe({
     // Sucesso
     next: (response) => {
-      console.log(response);
+      this.mensagemSucesso = `Parabéns, ${response.nome}! Sua conta foi criada com sucesso.`;
+      this.formRegister.reset(); // Limpar o formulário.
     },
     // Falha
     error: (e) => {
-      console.log(e.error);
+      this.mensagemErro = e.error.message;
     }
   }).add(() => {
     this.ngxSpinnerService.hide();

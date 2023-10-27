@@ -4,7 +4,7 @@
 */
 
 export class CriarContaResponseModel {
-    id: string = '';
-    nome: string = '';
-    email: string = '';
-  }
+  id: string = '';
+  nome: string = '';
+  email: string = '';
+}

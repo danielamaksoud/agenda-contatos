@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NgxSpinnerService} from 'ngx-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { AutenticarRequestModel } from 'src/app/models/usuarios/autenticar-request.model';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-login',
@@ -8,12 +10,13 @@ import { NgxSpinnerService} from 'ngx-spinner';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-
   // Método construtor
 
-constructor( 
-  // Injeção de dependência
-  private ngxSpinnerService: NgxSpinnerService ) { }
+  constructor(
+    // Injeção de dependência
+    private ngxSpinnerService: NgxSpinnerService,
+    private usuariosService: UsuariosService
+  ) {}
 
   // Criando a estrutura do formulário
   formLogin = new FormGroup({
@@ -47,10 +50,25 @@ constructor(
 
   // Função executada no submit do formulário
   onSubmit(): void {
-    console.log(this.formLogin.value.email);
-    console.log(this.formLogin.value.senha);
     // Exibindo o spinner
     this.ngxSpinnerService.show();
-  }
 
+    const model: AutenticarRequestModel = {
+      email: this.formLogin.value.email as string,
+      senha: this.formLogin.value.senha as string,
+    };
+
+    this.usuariosService.autenticar(model)
+    .subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (e) => {
+        console.log(e.error);
+      }
+    }).add(() => {
+      this.ngxSpinnerService.hide();
+    });
+
+  }
 }
