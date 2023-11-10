@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { HttpClientModule} from '@angular/common/http';
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +19,7 @@ import { HttpClientModule} from '@angular/common/http';
     LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

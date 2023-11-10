@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AuthenticationHelper } from 'src/app/helpers/authentication.helper';
 import { AutenticarRequestModel } from 'src/app/models/usuarios/autenticar-request.model';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
@@ -10,12 +11,16 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  // Método construtor
 
+  // Variáveis do componente
+  mensagemErro: string = '';
+
+  // Método construtor
   constructor(
     // Injeção de dependência
     private ngxSpinnerService: NgxSpinnerService,
-    private usuariosService: UsuariosService
+    private usuariosService: UsuariosService,
+    private authenticationHelper: AuthenticationHelper,
   ) {}
 
   // Criando a estrutura do formulário
@@ -58,13 +63,17 @@ export class LoginComponent {
       senha: this.formLogin.value.senha as string,
     };
 
-    this.usuariosService.autenticar(model)
+    this.usuariosService
+    .autenticar(model)
     .subscribe({
       next: (response) => {
-        console.log(response);
+        // Gravar os dados do usuário autenticado na Local Storage
+        this.authenticationHelper.signIn(response);
+        // Redirecionar para a página de dashboard
+        window.location.href = "/admin/dashboard";
       },
       error: (e) => {
-        console.log(e.error);
+        this.mensagemErro = e.error.message;
       }
     }).add(() => {
       this.ngxSpinnerService.hide();

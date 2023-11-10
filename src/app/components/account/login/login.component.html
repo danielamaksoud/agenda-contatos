@@ -6,6 +6,22 @@
           <h2>Acessar Agenda</h2>
           <p>Entre com suas credenciais de usuário.</p>
         </div>
+
+        <div
+          *ngIf="mensagemErro"
+          class="alert alert-danger alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>Erro!</strong> {{ mensagemErro }}
+          <button
+            type="button"
+            class="btn-close"
+            (click)="mensagemErro = ''"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+
         <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
           <div class="mb-2">
             <label>Email de acesso:</label>
