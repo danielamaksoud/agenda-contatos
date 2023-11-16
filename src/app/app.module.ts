@@ -12,6 +12,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { CreateContactComponent } from './components/admin/create-contact/create-contact.component';
+import { ListContactsComponent } from './components/admin/list-contacts/list-contacts.component';
+import { EditContactComponent } from './components/admin/edit-contact/edit-contact.component';
+import { ChartModule } from 'angular-highcharts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +25,9 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
     RegisterComponent,
     ForgotPasswordComponent,
     DashboardComponent,
+    CreateContactComponent,
+    ListContactsComponent,
+    EditContactComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +37,7 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
     BrowserAnimationsModule,
     NgxSpinnerModule,
     HttpClientModule,
+    ChartModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

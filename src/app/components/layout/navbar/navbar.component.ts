@@ -8,8 +8,10 @@ import { AuthenticationHelper } from 'src/app/helpers/authentication.helper';
 })
 export class NavbarComponent implements OnInit {
 
-  // Variável do compoente
+  // Variáveis do compoente
   isSignedIn: boolean = false;
+  nomeUsuario: string = "";
+  emailUsuario: string = "";
 
   // Construtor
   constructor(
@@ -21,6 +23,23 @@ export class NavbarComponent implements OnInit {
 
     this.isSignedIn = this.authenticationHelper.isSignedIn();
 
+    if(this.isSignedIn) {
+      // Captura os dados do usuário autenticado
+      const data = this.authenticationHelper.getData();
+      this.nomeUsuario = data?.nome as string;
+      this.emailUsuario = data?.email as string;
+    }
+
+  }
+
+  // Método para fazer o logout do usuário
+  logout(): void {
+    if(window.confirm('Deseja realmente sair do sistema?')) {
+      // Faz o logout do usuário
+      this.authenticationHelper.signOut();
+      // Redireciona para a página de login
+      window.location.href = "/account/login";
+    }
   }
 
 }
