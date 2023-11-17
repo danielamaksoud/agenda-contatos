@@ -1,1 +1,61 @@
-<p>create-contact works!</p>
+<div class="mt-4">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <h4>Cadastrar contatos</h4>
+                <p>Entre com os dados do contato para cadastrar em sua agenda.</p>
+                <form [formGroup]="formCreateContact" (ngSubmit)="onSubmit()">
+                    <div class="row mb-2">
+                        <div class="col-md-6">
+                            <label>Nome do contato:</label>
+                            <input type="text" class="form-control" formControlName="nome" placeholder="Digite o nome aqui">
+                            <div class="text-danger" *ngIf="form.nome.touched && form.nome.invalid">
+                                <span *ngIf="form.nome.errors.required">
+                                    Por favor, informe o nome do contato.
+                                </span>
+                                <span *ngIf="form.nome.errors.minlength">
+                                    Por favor, informe no mínimo 8 caracteres.
+                                </span>
+                                <span *ngIf="form.nome.errors.maxlength">
+                                    Por favor, informe no máximo 100 caracteres.
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Email do contato:</label>
+                            <input type="text" class="form-control" formControlName="email" placeholder="Digite o email aqui">
+                            <div class="text-danger" *ngIf="form.email.touched && form.email.invalid">
+                                <span *ngIf="form.email.errors.required">
+                                    Por favor, informe o endereço de email do contato.
+                                </span>
+                                <span *ngIf="form.email.errors.email">
+                                    Por favor, informe um endereço de email válido.
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Telefone do contato:</label>
+                            <input type="text" class="form-control" formControlName="telefone" placeholder="Digite o telefone aqui" mask="(00)00000-0000">
+                            <div class="text-danger" *ngIf="form.telefone.touched && form.telefone.invalid">
+                                <span *ngIf="form.telefone.errors.required">
+                                    Por favor, informe o telefone do contato.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <input type="submit" class="btn btn-success" value="Cadastrar Contato" [disabled]="!formCreateContact.valid">
+                            <a [routerLink]="['/admin/list-contacts']" class="btn btn-light">
+                                Ir para a consulta
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>    
+</div>

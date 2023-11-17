@@ -16,7 +16,8 @@ import { CreateContactComponent } from './components/admin/create-contact/create
 import { ListContactsComponent } from './components/admin/list-contacts/list-contacts.component';
 import { EditContactComponent } from './components/admin/edit-contact/edit-contact.component';
 import { ChartModule } from 'angular-highcharts';
-
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask} from 'ngx-mask'
+;
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,8 +39,10 @@ import { ChartModule } from 'angular-highcharts';
     NgxSpinnerModule,
     HttpClientModule,
     ChartModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
   ],
-  providers: [],
+  providers: [ provideNgxMask() ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
